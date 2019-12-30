@@ -195,50 +195,6 @@ template <class T> bool AVLtree<T>::insert(T key) {
     return true;
 }
 
-//delete node with current key from tree 
-template <class T> void AVLtree<T>::deleteKey(const T delKey){
-    if (root == NULL){
-        return;
-    }
-    AVLnode<T> *node = root, *parent  = root, *delNode = NULL, *child   = root;
-    while(child != NULL){
-        parent = node;
-        node = child;
-        if(delKey >= node->key){
-            child = node->right;
-        }
-        else
-        {
-            child = node->left;
-        }
-        if (delKey == node->key){
-            delNode = node;
-        }
-    }
-    if (delNode != NULL) {
-        delNode->key = node->key;
-        if(node->left != NULL){
-            child = node->left;
-        }
-        else{
-            child = node->right;
-        }
-        //child = node->left != NULL ? node->left : node->right;
-        if (root->key == delKey) {
-            root = child;
-        }
-        else{
-            if(parent->left == node){
-                parent->left = child;
-            }
-            else{
-                parent->right = child;
-            }
-            rebalance(parent);
-        }
-    }
-}
- 
 template <class T> void AVLtree<T>::printBalance(){
     cout << "Printing balance: ";
     printBalance(root);
